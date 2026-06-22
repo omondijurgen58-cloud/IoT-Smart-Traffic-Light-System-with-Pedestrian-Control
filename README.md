@@ -1,4 +1,66 @@
 # IoT-Smart-Traffic-Light-System-with-Pedestrian-Control
+code
+#include<stdio.h>
+int main() {
+int red = 2;
+int yellow = 3;
+int green = 4;
+int pedestrian = 5;
+int button = 8;
+
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(yellow, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(pedestrian, OUTPUT);
+  pinMode(button, INPUT_PULLUP);
+}
+
+void loop() {
+
+  // Normal state
+  digitalWrite(green, HIGH);
+  digitalWrite(yellow, LOW);
+  digitalWrite(red, LOW);
+  digitalWrite(pedestrian, LOW);
+
+  // Wait for button press
+  if (digitalRead(8) == LOW) {
+
+    // Green to Yellow
+    digitalWrite(green, LOW);
+    digitalWrite(yellow, HIGH);
+    delay(1000);
+
+    // Yellow to Red
+    digitalWrite(yellow, LOW);
+    digitalWrite(red, HIGH);
+
+    // Pedestrian crossing
+    digitalWrite(pedestrian, HIGH);
+    delay(5000);
+
+    // End crossing
+    digitalWrite(pedestrian, LOW);
+
+    // Keep red on briefly
+    delay(1000);
+
+    // Red to Yellow
+    digitalWrite(red, LOW);
+    digitalWrite(yellow, HIGH);
+    delay(1000);
+
+    // Yellow to Green
+    digitalWrite(yellow, LOW);
+    digitalWrite(green, HIGH);
+
+    // Cars move for a while
+    delay(8000);
+  }
+}
+the project over view 
+https://www.tinkercad.com/things/j0sZiwLGkkR-smashing-allis 
 Project Overview
 
 This project is an IoT-based Smart Traffic Light System with Pedestrian Button Control using an Arduino microcontroller. It simulates a real-world traffic intersection where pedestrians can request crossing using a push button.
@@ -50,3 +112,4 @@ The push button acts as a manual interrupt trigger:
 If NOT pressed → normal traffic cycle continues
 If pressed → system prioritizes pedestrian crossing
 After delay → system resumes normal traffic operation
+
